@@ -5,6 +5,7 @@ import win32com.client
 import os
 import pathlib
 import urllib
+import locale
 
 today = date.today().strftime("%Y%m%d")
 scoreboard = ""
@@ -50,14 +51,19 @@ def getAllGames():
     print("")
 
 def getOtherGames():
-    ids = input("Entrer les codes des matchs de l'affiche principales et des affiches importantes avec un espace entre chaque code : ")
-    codes = ids.split()
-
     global scoreboard
+    gameId = input("Match à retirer (taper 'ok' pour finir) : ")
 
-    for match in scoreboard["games"]:
-        if match["gameId"] in codes:
-            scoreboard["games"].remove(match)
+    while(gameId != "ok"):
+        for match in scoreboard["games"]:
+            if match["gameId"] == gameId:
+                scoreboard["games"].remove(match)
+                print("Match " + gameId + " retiré de la liste")
+        gameId = input("Match à retirer (taper 'ok' pour finir) : ")
+
+    print("Liste complétée")
+
+    #print(len(scoreboard["games"]))
     
     path = os.path.join(pathlib.Path().absolute(), "templates", "other_games", getPhotoshopFile(len(scoreboard["games"])))
     doPhotoshopStuff(path)
@@ -69,6 +75,11 @@ def doPhotoshopStuff(path):
     doc = psApp.Application.ActiveDocument
     print("Photoshop est ouvert")
     print("")
+
+    print("Ajout de la date")
+    date = doc.ArtLayers["date"]
+    date_textview = date.TextItem
+    date_textview.contents = getFrenchDate()
 
     global scoreboard
     global standings
@@ -116,6 +127,38 @@ def getPhotoshopFile(teamsNumber):
         return "six_games.psd"
     if teamsNumber == 7 :
         return "seven_games.psd"
+
+def getFrenchDate():
+    month = date.today().strftime("%m")
+    french_month = ""
+    if month == "01" :
+        french_month= "janvier"
+    if month == "02" :
+        french_month= "février"
+    if month == "03" :
+        french_month= "mars"
+    if month == "04" :
+        french_month= "avril"
+    if month == "05" :
+        french_month= "mai"
+    if month == "06" :
+        french_month= "juin"
+    if month == "07" :
+        french_month= "juillet"
+    if month == "08" :
+        french_month= "aout"
+    if month == "09":
+        french_month= "septembre"
+    if month == "10" :
+        french_month= "octobre"
+    if month == "11" :
+        french_month= "novembre"
+    if month == "12" :
+        french_month= "décembre"
+    
+    print(str(date.today().strftime("%d") + " " + french_month))
+    return str(date.today().strftime("%d") + " " + french_month)
+
 
 
 
