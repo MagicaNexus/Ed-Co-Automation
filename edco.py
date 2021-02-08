@@ -157,7 +157,7 @@ def getFrenchDate():
         french_month= "décembre"
     
     print(str(date.today().strftime("%d") + " " + french_month))
-    return str(date.today().strftime("%d") + " " + french_month.capitalize)
+    return str(date.today().strftime("%d") + " " + french_month.capitalize())
 
 
 
