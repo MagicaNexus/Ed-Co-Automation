@@ -12,16 +12,16 @@ standings = ""
 path = ""
 
 def main():
-    #parser = argparse.ArgumentParser(description="Pour utiliser l'outil, tu dois remplir les arguments ci dessous : ")
+    parser = argparse.ArgumentParser(description="Pour utiliser l'outil, tu dois remplir les arguments ci dessous : ")
 
     #parser.add_argument('--mode', "-M", help='GOD, OG, AG')
     #parser.add_argument('--gameId', "-ID", help='Optionnel - L\'id du match pour le Game Of The Day')
-    #parser.add_argument('--date', "-D", help='Optionnel - Tu dois remplir la date voulue sur la forme YYYYMMDD (ex : 20210521) - Defaut : today')
+    parser.add_argument('--date', "-D", help='Optionnel - Tu dois remplir la date voulue sur la forme YYYYMMDD (ex : 20210521) - Defaut : today')
 
-    #args = parser.parse_args()
-    #if args.date and len(args.date) == 8:
-        #global today
-        #today = args.date
+    args = parser.parse_args()
+    if args.date and len(args.date) == 8:
+        global today
+        today = args.date
 
     global scoreboard
     global standings
