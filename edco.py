@@ -106,7 +106,7 @@ def doPhotoshopStuff(path):
                 vd_exterieur_textview.contents = str(team["awayWin"] + "-" + team["awayLoss"])
                 rank_exterieur_textview = rank_exterieur.TextItem
                 rank_exterieur_textview.contents = str(teams.index(team) + 1)
-                #setLogo(match, team, psApp)
+                setLogo(match, team, psApp)
         
         print("Modification OK ! Game " + str(index) + " is " + match["hTeam"]["triCode"] + " vs " + match["vTeam"]["triCode"])
 
