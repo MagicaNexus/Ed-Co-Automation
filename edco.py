@@ -106,10 +106,18 @@ def doPhotoshopStuff(path):
                 vd_exterieur_textview.contents = str(team["awayWin"] + "-" + team["awayLoss"])
                 rank_exterieur_textview = rank_exterieur.TextItem
                 rank_exterieur_textview.contents = str(teams.index(team) + 1)
+                setLogo(match, team, psApp)
         
         print("Modification OK ! Game " + str(index) + " is " + match["hTeam"]["triCode"] + " vs " + match["vTeam"]["triCode"])
 
     print("Fin du programme")
+
+def setLogo(match, team, app):
+    path = os.path.join(pathlib.Path().absolute(), "nba_logos", team["teamSitesOnly"]["teamTricode"] + ".png")
+    print(path)
+    app.Open(path)
+
+
 
 
 def getPhotoshopFile(teamsNumber):
@@ -155,8 +163,7 @@ def getFrenchDate():
         french_month= "novembre"
     if month == "12" :
         french_month= "décembre"
-    
-    print(str(date.today().strftime("%d") + " " + french_month))
+
     return str(date.today().strftime("%d") + " " + french_month.upper())
 
 
